@@ -1,0 +1,4 @@
+# Managed by Hydra
+
+log_every_n_epochs: 1
+weights: False

@@ -1,0 +1,22 @@
+# Managed by Hydra
+
+dataset: ScanQA
+dataset_path: ${data.dataset_root_path}/scanqa
+
+glove_path: ${data.scanqa.dataset_path}/glove.p
+
+splits:
+  train_list: ${data.scanqa.dataset_path}/ScanQA_v1.0_train.json
+  val_list: ${data.scanqa.dataset_path}/ScanQA_v1.0_val.json
+  test_w_obj_list: ${data.scanqa.dataset_path}/ScanQA_v1.0_test_w_obj.json
+  test_wo_obj_list: ${data.scanqa.dataset_path}/ScanQA_v1.0_test_wo_obj.json
+
+test_w_obj: False
+
+max_question_length: 40
+max_answer_length: 40
+max_answers: 4
+
+augmentation:
+  mask: True
+  synonym: True

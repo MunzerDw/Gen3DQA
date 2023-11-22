@@ -1,0 +1,66 @@
+# Managed by Hydra
+
+defaults:
+  - _self_
+  - softgroup: base
+  - vqa: base
+  - vqg: base
+
+ckpt_path: null
+weights_path: null
+experiment_name: run_1
+
+freeze_softgroup: True
+freeze_vqa: False
+freeze_vqg: True
+precompute_softgroup_data: False
+activate_cider_loss: False
+
+log:
+  module: TensorBoardLogger  # WandbLogger or TensorBoardLogger
+  # https://pytorch-lightning.readthedocs.io/en/stable/extensions/generated/pytorch_lightning.loggers.WandbLogger.html
+  WandbLogger:
+    project: 3DVQA
+    name: run_1
+  # https://pytorch-lightning.readthedocs.io/en/stable/api/pytorch_lightning.loggers.tensorboard.html
+  TensorBoardLogger:
+    name: 3DVQA
+    default_hp_metric: False
+
+
+# https://pytorch-lightning.readthedocs.io/en/stable/common/trainer.html
+trainer:
+  accelerator: gpu
+  devices: auto
+  num_nodes: 1
+  max_epochs: 1500
+  num_sanity_val_steps: 20
+  check_val_every_n_epoch: 5
+
+
+# https://pytorch-lightning.readthedocs.io/en/stable/api/pytorch_lightning.callbacks.ModelCheckpoint.html
+checkpoint_monitor:
+  monitor: val/vqa_loss
+  mode: min
+  save_top_k: 1
+  every_n_epochs: 1
+
+
+lr_decay:
+  decay_start_epoch: 50
+  decay_stop_epoch: 65
+
+
+# https://pytorch-lightning.readthedocs.io/en/stable/common/optimization.html
+optimizer:
+    name: Adam # Adam, AdamW or SGD
+    lr: 0.00008 # 0.00002 for CIDEr loss
+    warm_up_epochs: 10
+
+
+inference:
+  TEST_NMS_THRESH: 1 #Not doing nms will significantly lower the score of pointgroup. Hence, the TEST_NMS_THRESH of pointgroup is set independently in pointgrou.yaml
+  split: val
+  evaluate: True
+  save_predictions: False
+  output_dir: prediction

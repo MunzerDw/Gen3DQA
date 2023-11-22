@@ -1,0 +1,34 @@
+# data
+data/scannet/train
+data/scannet/val
+data/scannet/test
+data/scannet/scans
+data/scannet/scans_test
+data/scannet/tasks
+data/precompute_softgroup_data
+visualize/scannet/output_ply
+visualize/scannet/scanrefer_classes_normals
+
+# log
+log/
+logs/
+wandb
+
+# output
+output/
+outputs/
+
+# temp
+temp/
+
+# pointgroup ops
+minsu3d/common_ops/COMMON_OP*
+minsu3d/common_ops/build/
+
+# other files
+.DS_Store
+__pycache__
+.vscode
+.idea
+env
+*.egg-info

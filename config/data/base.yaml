@@ -1,0 +1,12 @@
+# Managed by Hydra
+
+dataset_root_path: ${project_root_path}/data
+batch_size: 32
+num_workers: 8
+overfit: False
+shuffle: True
+
+defaults:
+  - _self_
+  - scannet: base
+  - scanqa: base
